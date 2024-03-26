@@ -21,7 +21,7 @@ router.post("/login", (req, res) => {
     // token configuration
     const payload = {
       user: {
-        id: Date.now(),
+        id: 1008,
         email,
       },
     };

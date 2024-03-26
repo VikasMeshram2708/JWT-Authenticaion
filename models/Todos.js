@@ -5,12 +5,35 @@ const router = express.Router();
 
 router.get("/todos", AuthMiddleware, async (req, res) => {
   try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/todos");
-    const result = await response.json();
+    const todos = [
+      {
+        id: 1,
+        todo: "Learn JSX",
+        done: false,
+        authorId: 1008,
+      },
+      {
+        id: 2,
+        todo: "Learn REACT",
+        done: false,
+        authorId: 1009,
+      },
+      {
+        id: 3,
+        todo: "Learn HTML",
+        done: false,
+        authorId: 1008,
+      },
+    ];
+
+    const currentUserId = req.user.user.id;
+
+    const userTodos = todos?.filter((todo) => todo.authorId === currentUserId)
+
     return res
       .json({
         success: true,
-        data: result,
+        data: userTodos,
       })
       .status(201);
   } catch (error) {
